@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<body>
+<table border="1">
+    <tr>
+        <th>SEQ</th>
+        <th>ID</th>
+        <th>ISBN</th>
+        <th>TITLE</th>
+        <th>AUTHOR</th>
+        <th>GENRE</th>
+        <th>CreatedAt</th>
+        <th>수정</th>
+        <th>삭제</th>
+    </tr>
+    <tr th:each="book, bookState : ${booklist}">
+        <td th:text="${bookState.count}"></td>
+        <td th:text="${book.id}"></td>
+        <td th:text="${book.isbn}"></td>
+        <td><a th:href="@{/bookpage/{id}(id=${book.id})}"><span th:text="${book.title}"></span></a></td>
+        <td th:text="${book.author}"></td>
+        <td th:text="${book.genre}"></td>
+        <td th:text="${#temporals.format(book.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
+        <td><a th:href="@{/bookpage/edit/{id}(id=${book.id})}">update</a></td>
+        <td><a th:href="@{/bookpage/delete/{id}(id=${book.id})}">delete</a></td>
+    </tr>
+</table>
+<a href="../bookpage/add">등록하기</a>
+</body>
+</html>
